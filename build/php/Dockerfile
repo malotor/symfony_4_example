@@ -3,8 +3,9 @@ MAINTAINER Manel López  <malotor@gmail.com>
 
 RUN apk update \
     && apk add  --no-cache git mysql-client curl freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf \
-    && docker-php-source extract \  
+    && docker-php-source extract \
     && docker-php-source delete \
+    && docker-php-ext-install zip \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
