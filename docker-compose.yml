@@ -1,0 +1,19 @@
+---
+version: '2'
+
+services:
+
+    app:
+        build:
+            context: ./build/php
+        container_name: app
+        command: php bin/console server:run
+        working_dir: /code
+        volumes:
+            - "$PWD:/code"
+        ports:
+            - "8080:8000"
+        environment:
+            APP_ENV: dev
+            XDEBUG_CONFIG: remote_host=${REMOTE_HOST}
+            PHP_IDE_CONFIG: serverName=${SERVER_NAME}
