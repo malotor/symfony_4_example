@@ -7,7 +7,7 @@ services:
         build:
             context: ./build/php
         container_name: app
-        command: php bin/console server:run
+        command: php bin/console server:run 0.0.0.0:8000
         working_dir: /code
         volumes:
             - "$PWD:/code"
