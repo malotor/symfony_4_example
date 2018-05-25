@@ -22,6 +22,9 @@ class ApiTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals("Hello World", $response['message']);
+        $this->assertCount(1, $response);
+
+
+        $this->assertEquals("Hello World", $response['tweets'][0]['text']);
     }
 }
