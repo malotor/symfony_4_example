@@ -28,3 +28,6 @@ services:
 
     App\Infrastructure\Service\Twitter\:
         resource: '../src/Infrastructure/Service/Twitter/'
+
+    App\Application\:
+        resource: '../src/Application/'
