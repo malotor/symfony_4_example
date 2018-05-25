@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Application\TweetDTO;
 use App\Infrastructure\Service\Twitter\TwitterService;
 use App\Model\Tweet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,15 +28,10 @@ class TwitterController extends Controller
         $response = $this->twitterService->getTweetsFromAcount("fake",1);
 
         array_walk($response, function(&$e) {
-            $e = $this->transform($e);
+            $e = (new TweetDTO($e))->get();
         });
 
         return new JsonResponse(['tweets' => $response ]);
     }
-
-    private function transform(Tweet $tweet)
-    {
-        return ['text'=> $tweet->getText()];
-    }
-
+    
 }
