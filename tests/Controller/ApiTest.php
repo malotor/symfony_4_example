@@ -5,11 +5,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ApiTest extends WebTestCase
 {
-    public function testShowPost()
+    public function testRecoverTweets()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/');
+        $client->request('GET', '/tweets/mloptor/1');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -17,11 +17,11 @@ class ApiTest extends WebTestCase
             $client->getResponse()->headers->contains(
                 'Content-Type',
                 'application/json'
-            ),
-            'the "Content-Type" header is "application/json"' // optional message shown on failure
+            )
         );
 
+        $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals("Hello World", (json_decode($client->getResponse()->getContent(), true))['message']);
+        $this->assertEquals("Hello World", $response['message']);
     }
 }
