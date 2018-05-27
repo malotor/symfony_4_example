@@ -21,6 +21,7 @@ class TweetDTO {
     public function get()
     {
         return [
+            'date' => $this->tweet->getDate(),
             'text' => $this->tweet->getText()
         ];
     }

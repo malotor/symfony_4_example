@@ -13,20 +13,16 @@ class TwitterController extends Controller
 {
     private $getTweetsFromAccount;
 
-    /**
-     * TwitterController constructor.
-     * @param $twitterService
-     */
     public function __construct(GetTweetsFromAccount $getTweetsFromAccount)
     {
         $this->getTweetsFromAccount = $getTweetsFromAccount;
     }
 
 
-    public function index()
+    public function index($account,$n)
     {
 
-        $response = $this->getTweetsFromAccount->execute();
+        $response = $this->getTweetsFromAccount->execute($account,$n);
 
         return new JsonResponse(['tweets' => $response ]);
     }

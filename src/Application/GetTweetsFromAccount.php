@@ -1,35 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: manel
- * Date: 25/5/18
- * Time: 18:50
- */
-
 namespace App\Application;
 
-
 use App\Infrastructure\Service\Twitter\TwitterService;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Model\TweetRepository;
 
 class GetTweetsFromAccount
 {
 
     private $twitterService;
 
-    /**
-     * TwitterController constructor.
-     * @param $twitterService
-     */
-    public function __construct(TwitterService $twitterService)
+
+    public function __construct(TweetRepository $twitterService)
     {
         $this->twitterService = $twitterService;
     }
 
-    public function execute()
+    public function execute($account,$n)
     {
 
-        $response = $this->twitterService->getTweetsFromAcount("fake",1);
+        $response = $this->twitterService->getTweetsFromAcount($account,$n);
 
         array_walk($response, function(&$e) {
             $e = (new TweetDTO($e))->get();

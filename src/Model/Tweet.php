@@ -3,10 +3,12 @@ namespace App\Model;
 
 class Tweet {
     private $text;
+    private $date;
 
-    public function __construct($text)
+    public function __construct($text, $date)
     {
         $this->text = $text;
+        $this->date = $date;
     }
 
     /**
@@ -16,5 +18,14 @@ class Tweet {
     {
         return $this->text;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
 
 }

@@ -6,4 +6,7 @@ services:
     # and then fetch that alias from the container. As a convention,
     # aliases are prefixed with test. For example:
     #
-    # test.App\Service\MyService: '@App\Service\MyService'
+    #test.service.twitter: '@service.twitter'
+    service.twitter:
+        class: App\Infrastructure\Service\Twitter\TwitterServiceMock
+        public: true

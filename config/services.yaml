@@ -1,6 +1,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    twitter.consumer_key: IcugvlStOYTxEPICITXyBoOz3
+    twitter.consumer_secret: SbDtTvSuqxsHwXqz9Oxxen9EfyB5l9akVhh3DuyL0RdUnbSk52
+    twitter.access_token: 490402045-1QDYNdHVlsu8fLE9UwY94XC1JJF29zkiG2p2RgaA
+    twitter.access_token_secret: HVow4BT6QCQDs5N1KRgpFAj7cE58e2kG4JZ19gM1pr41N
 
 services:
     # default configuration for services in *this* file
@@ -15,7 +19,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Model,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -26,8 +30,16 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Infrastructure\Service\Twitter\:
-        resource: '../src/Infrastructure/Service/Twitter/'
+    service.twitter:
+        class: App\Infrastructure\Service\Twitter\TwitterService
+        public: true
+        arguments:
+          - '%twitter.consumer_key%'
+          - '%twitter.consumer_secret%'
+          - '%twitter.access_token%'
+          - '%twitter.access_token_secret%'
+
+    App\Model\TweetRepository: '@service.twitter'
 
     App\Application\:
         resource: '../src/Application/'
