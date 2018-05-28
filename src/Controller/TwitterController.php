@@ -21,10 +21,14 @@ class TwitterController extends Controller
 
     public function index($account,$n)
     {
+        try {
+            $response = $this->getTweetsFromAccount->execute($account,$n);
+            return new JsonResponse(['tweets' => $response ]);
 
-        $response = $this->getTweetsFromAccount->execute($account,$n);
-
-        return new JsonResponse(['tweets' => $response ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['code' => 500, 'message' => $e->getMessage() ], 500);
+        }
     }
+
 
 }

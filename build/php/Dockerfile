@@ -8,7 +8,7 @@ RUN apk update \
     && pecl install xdebug redis \
     && docker-php-ext-enable xdebug redis \
     && docker-php-source delete \
-    && docker-php-ext-install mcrypt pdo_mysql soap \
+    && docker-php-ext-install mcrypt pdo_mysql soap zip \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \

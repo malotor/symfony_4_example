@@ -8,5 +8,5 @@ services:
     #
     #test.service.twitter: '@service.twitter'
     service.twitter:
-        class: App\Infrastructure\Service\Twitter\TwitterServiceMock
+        #class: App\Infrastructure\Service\Twitter\TwitterServiceMock
         public: true
